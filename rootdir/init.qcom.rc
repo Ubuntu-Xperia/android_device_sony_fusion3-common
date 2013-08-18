@@ -218,6 +218,8 @@ on post-fs-data
     mkdir /data/misc/wifi/prima 0775 wifi wifi
     exec /system/bin/mac-update
 
+    start wlan
+
     write /sys/module/wcnss_ssr_8960/parameters/enable_riva_ssr 1
     write /sys/devices/platform/wcnss_wlan.0/serial_number ${ro.serialno}
     write /dev/wcnss_wlan 1
@@ -628,4 +630,10 @@ service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
     user root
     group system qcom_oncrpc
     disabled
+    oneshot
+
+service wlan /system/bin/sh /system/etc/init.qcom.wlan.sh
+    class main
+    user root
+    group system system
     oneshot
